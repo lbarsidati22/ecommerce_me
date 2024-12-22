@@ -1,3 +1,4 @@
+import 'package:ecommerce_me/layout/layout_screen.dart';
 import 'package:ecommerce_me/screens/home_page.dart';
 import 'package:ecommerce_me/screens/splach_page.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class EcommerceApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
       ),
-      home: SplachPage(),
+      home: LayoutScreen(),
     );
   }
 }

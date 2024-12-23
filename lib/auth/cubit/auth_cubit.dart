@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:ecommerce_me/auth/cubit/auth_state.dart';
+import 'package:ecommerce_me/shared/cach_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
@@ -21,6 +22,10 @@ class AuthCubit extends Cubit<AuthState> {
     );
     var responseBody = jsonDecode(response.body);
     if (responseBody['status'] == true) {
+      CachHelper.setToData(
+        key: 'token',
+        value: responseBody['data']['token'],
+      );
       print(responseBody['data']);
       emit(LoginSuccessState());
     } else {

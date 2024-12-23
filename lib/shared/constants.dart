@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+String? token;
 Widget myTextFeild({
   required String hintText,
   required TextEditingController controller,

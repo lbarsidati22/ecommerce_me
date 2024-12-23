@@ -4,10 +4,18 @@ import 'package:ecommerce_me/layout/cubit/layout_cubit.dart';
 import 'package:ecommerce_me/layout/layout_screen.dart';
 import 'package:ecommerce_me/screens/home_page.dart';
 import 'package:ecommerce_me/screens/splach_page.dart';
+import 'package:ecommerce_me/shared/cach_helper.dart';
+import 'package:ecommerce_me/shared/constants.dart';
+import 'package:ecommerce_me/shared/my_bloc_observer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = MyBlocObserver();
+  await CachHelper.cachInit();
+  token = CachHelper.getFromData(key: 'token');
+  print('your token is :$token');
   runApp(const EcommerceApp());
 }
 
@@ -20,7 +28,10 @@ class EcommerceApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => LayoutCubit(),
+          create: (context) => LayoutCubit()
+            ..getBanners()
+            ..getCategory()
+            ..getPrudact(),
         ),
         BlocProvider(
           create: (context) => AuthCubit(),
@@ -32,7 +43,7 @@ class EcommerceApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
         ),
-        home: LoginPage(),
+        home: token != null && token != '' ? LayoutScreen() : LoginPage(),
       ),
     );
   }

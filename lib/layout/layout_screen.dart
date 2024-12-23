@@ -2,6 +2,7 @@ import 'package:ecommerce_me/layout/cubit/layout_cubit.dart';
 import 'package:ecommerce_me/layout/cubit/layout_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class LayoutScreen extends StatelessWidget {
   const LayoutScreen({super.key});
@@ -14,7 +15,11 @@ class LayoutScreen extends StatelessWidget {
         final cubit = BlocProvider.of<LayoutCubit>(context);
         return Scaffold(
           appBar: AppBar(
-            title: Text('Home Layout'),
+            title: SvgPicture.asset(
+              'assets/images/logo.svg',
+              height: 60,
+              color: Colors.black,
+            ),
           ),
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: cubit.currentIndex,

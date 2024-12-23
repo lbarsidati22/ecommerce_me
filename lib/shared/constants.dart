@@ -6,6 +6,7 @@ Widget myTextFeild({
   required IconData icon,
 }) =>
     TextFormField(
+      keyboardType: TextInputType.emailAddress,
       validator: (ValueKey) {
         if (ValueKey!.isEmpty) {
           return '$hintText required';

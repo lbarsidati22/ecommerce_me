@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
 import 'package:ecommerce_me/auth/cubit/auth_state.dart';
 import 'package:http/http.dart' as http;
@@ -9,10 +11,24 @@ class AuthCubit extends Cubit<AuthState> {
     required String email,
     required String password,
   }) async {
-    Response response = await http
-        .post(Uri.parse('https://student.valuxapps.com/api/login'), body: {
-      'email': email,
-      'password': password,
-    });
+    emit(LoginLeadingState());
+    Response response = await http.post(
+      Uri.parse('https://student.valuxapps.com/api/login'),
+      body: {
+        'email': email,
+        'password': password,
+      },
+    );
+    var responseBody = jsonDecode(response.body);
+    if (responseBody['status'] == true) {
+      print(responseBody['data']);
+      emit(LoginSuccessState());
+    } else {
+      emit(
+        LoginFailedState(
+          error: responseBody['message'],
+        ),
+      );
+    }
   }
 }

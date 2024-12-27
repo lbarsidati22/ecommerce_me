@@ -21,3 +21,9 @@ class GetPrudactSuccsessState extends LayoutState {}
 class GetPrudactFailedState extends LayoutState {}
 
 class GetPrudactLeadingState extends LayoutState {}
+
+class GetFavoriteSuccsessState extends LayoutState {}
+
+class GetFavoriteFailedState extends LayoutState {}
+
+class GetFavoriteLeadingState extends LayoutState {}

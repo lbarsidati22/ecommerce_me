@@ -85,4 +85,29 @@ class LayoutCubit extends Cubit<LayoutState> {
       emit(GetPrudactFailedState());
     }
   }
+
+  List<PrudactModel> favorits = [];
+  Set<String> favoritID = {};
+  void getFavorite() async {
+    favorits.clear();
+
+    Response response = await http.get(
+      Uri.parse('https://student.valuxapps.com/api/favorites'),
+      headers: {
+        'lang': 'en',
+        'Authorization': token!,
+      },
+    );
+    var responseBody = jsonDecode(response.body);
+    if (responseBody['status'] == true) {
+      emit(GetFavoriteSuccsessState());
+      for (var item in responseBody['data']['data']) {
+        favorits.add(PrudactModel.fromJson(data: item['product']));
+        favoritID.add(item['product']['id'].toString());
+      }
+      print('your favorite number is ${favorits.length}');
+    } else {
+      emit(GetFavoriteFailedState());
+    }
+  }
 }

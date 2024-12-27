@@ -171,9 +171,9 @@ class HomePage extends StatelessWidget {
                           child: InkWell(
                             onTap: () {},
                             child: Align(
-                              alignment: Alignment.bottomLeft,
+                              alignment: Alignment.center,
                               child: Icon(
-                                Icons.shopping_cart_rounded,
+                                Icons.favorite_border,
                               ),
                             ),
                           ),

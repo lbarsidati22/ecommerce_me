@@ -31,7 +31,8 @@ class EcommerceApp extends StatelessWidget {
           create: (context) => LayoutCubit()
             ..getBanners()
             ..getCategory()
-            ..getPrudact(),
+            ..getPrudact()
+            ..getFavorite(),
         ),
         BlocProvider(
           create: (context) => AuthCubit(),

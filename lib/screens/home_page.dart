@@ -140,19 +140,19 @@ class HomePage extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(12),
                                         ),
-                                        onPressed: () {},
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              'add',
-                                            ),
-                                            SizedBox(
-                                              width: 7,
-                                            ),
-                                            Icon(
-                                              Icons.shopping_cart_rounded,
-                                            ),
-                                          ],
+                                        onPressed: () {
+                                          cubit.addOrRemoveCarts(
+                                              prudactId: cubit
+                                                  .products[index].id
+                                                  .toString());
+                                        },
+                                        child: Icon(
+                                          Icons.shopping_cart_rounded,
+                                          color: cubit.cartsID.contains(cubit
+                                                  .products[index].id
+                                                  .toString())
+                                              ? Colors.red
+                                              : Colors.white,
                                         ),
                                       )
                                     ],
@@ -169,11 +169,22 @@ class HomePage extends StatelessWidget {
                               color: Colors.grey,
                               borderRadius: BorderRadius.circular(8)),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              cubit.addOrRemoveFavorite(
+                                  prudactId:
+                                      cubit.products[index].id.toString());
+                            },
                             child: Align(
                               alignment: Alignment.center,
                               child: Icon(
-                                Icons.favorite_border,
+                                cubit.favoritID.contains(
+                                        cubit.products[index].id.toString())
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                color: cubit.favoritID.contains(
+                                        cubit.products[index].id.toString())
+                                    ? Colors.red
+                                    : Colors.white,
                               ),
                             ),
                           ),
